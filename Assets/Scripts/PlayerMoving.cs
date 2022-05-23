@@ -9,6 +9,7 @@ public class PlayerMoving : MonoBehaviour
     [Header("Movement settings")]
     public float speed = 5f; //Скорость движения
     public float jumpForce = 7000f; //Сила прыжка
+    public float currentSpeed;
     [Header("Statement checks")]
     public float checkRadius;
     public LayerMask whatIsGround;
@@ -41,7 +42,8 @@ public class PlayerMoving : MonoBehaviour
     private void HandleMovement()
     {
         float moveX = Input.GetAxis("Horizontal"); //Получение направления движения
-        rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
+        currentSpeed = moveX * speed;
+        rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
         if (isGrounded && Input.GetKeyDown(KeyCode.Space)) rb.AddForce(Vector2.up * jumpForce); //Добавление силы прыжка
     }
     private void HandleOtherBalls()

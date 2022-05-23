@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchBall : MonoBehaviour { 
-    public GameObject ball, rockBall;
+    public GameObject ball, rockBall, beachBall;
 
 
     int whichBallIsOn = 1;
