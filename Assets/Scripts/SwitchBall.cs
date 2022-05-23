@@ -15,13 +15,17 @@ public class SwitchBall : MonoBehaviour {
                 rockBall.SetActive(true);
                 rockBall.transform.position = ball.transform.position;
                 whichBallIsOn = 2;
+                rockBall.GetComponent<Rigidbody2D>().velocity = new Vector2(ball.GetComponent<PlayerMoving>().currentSpeed, rockBall.GetComponent<Rigidbody2D>().velocity.y);
+
                 this.GetComponentInChildren<CameraFix>().player = rockBall;
                 break;
             case 2:
                 rockBall.SetActive(false);
                 ball.SetActive(true);
                 ball.transform.position = rockBall.transform.position;
-                whichBallIsOn = 1;  
+                whichBallIsOn = 1;
+                rockBall.GetComponent<Rigidbody2D>().velocity = new Vector2(ball.GetComponent<PlayerMoving>().currentSpeed, rockBall.GetComponent<Rigidbody2D>().velocity.y);
+
                 this.GetComponentInChildren<CameraFix>().player = ball;
                 break;
         }

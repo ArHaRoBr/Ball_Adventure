@@ -50,6 +50,7 @@ public class MovingPlatform : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         collision.gameObject.transform.SetParent(parentOfBall.transform, true);
+        collision.gameObject.transform.localScale = new Vector3(0.33f, 0.33f, 0.33f);//костыль))
     }
 
 }
