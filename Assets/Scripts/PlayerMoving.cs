@@ -13,7 +13,7 @@ public class PlayerMoving : MonoBehaviour
     [Header("Statement checks")]
     public float checkRadius;
     public LayerMask whatIsGround;
-    private bool isGrounded = false;
+    public bool isGrounded;
     [Header("Other")]
     public Transform spawnPoint;
     public Rigidbody2D rb; //С помощью Rigidbody 2D будет осуществляться управление объектом
@@ -35,7 +35,7 @@ public class PlayerMoving : MonoBehaviour
 
         }
         else Respawn();
-        HandleOtherBalls();
+       //HandleOtherBalls();
     }
 
 
