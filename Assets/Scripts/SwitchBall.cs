@@ -15,7 +15,7 @@ public class SwitchBall : MonoBehaviour {
                 rockBall.SetActive(true);
                 rockBall.transform.position = ball.transform.position;
                 whichBallIsOn = 2;
-                rockBall.GetComponent<Rigidbody2D>().velocity = new Vector2(ball.GetComponent<PlayerMoving>().currentSpeed, rockBall.GetComponent<Rigidbody2D>().velocity.y);
+                rockBall.GetComponent<Rigidbody2D>().velocity = new Vector2(ball.GetComponent<PlayerMoving>().currentSpeed, ball.GetComponent<Rigidbody2D>().velocity.y);
 
                 this.GetComponentInChildren<CameraFix>().player = rockBall;
                 break;
@@ -24,7 +24,7 @@ public class SwitchBall : MonoBehaviour {
                 ball.SetActive(true);
                 ball.transform.position = rockBall.transform.position;
                 whichBallIsOn = 1;
-                rockBall.GetComponent<Rigidbody2D>().velocity = new Vector2(ball.GetComponent<PlayerMoving>().currentSpeed, rockBall.GetComponent<Rigidbody2D>().velocity.y);
+                ball.GetComponent<Rigidbody2D>().velocity = new Vector2(rockBall.GetComponent<PlayerMoving>().currentSpeed, rockBall.GetComponent<Rigidbody2D>().velocity.y);
 
                 this.GetComponentInChildren<CameraFix>().player = ball;
                 break;
