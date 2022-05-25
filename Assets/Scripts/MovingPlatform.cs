@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    public GameObject parentOfBall;
     public float movementSpeed;
-    private Vector2 startPoint;
     public Vector2 endPoint;
+    public bool isOnPlatform = false;
 
+    private Vector2 startPoint;
     private Vector3 currentPosition;
     [SerializeField] private bool shouldMoveLeft = true;
     private float currentSpeed;
@@ -16,6 +18,7 @@ public class MovingPlatform : MonoBehaviour
     {
         startPoint = transform.position;
         currentPosition = transform.position;
+  
 
     }
     void FixedUpdate()
@@ -39,8 +42,15 @@ public class MovingPlatform : MonoBehaviour
 
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.transform.parent.position = new Vector2(this.transform.position.x, collision.transform.position.y);
+        collision.gameObject.transform.SetParent(transform, true);
+       
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        collision.gameObject.transform.SetParent(parentOfBall.transform, true);
+        collision.gameObject.transform.localScale = new Vector3(0.33f, 0.33f, 0.33f);//костыль))
+    }
+
 }

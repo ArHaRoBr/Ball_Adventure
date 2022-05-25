@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class PlayerMoving : MonoBehaviour
 {
-   //public float maxHealth = 100; //Здоровье игрока
+    [Header("Ball health")]
     public float Health = 5;
-    public Rigidbody2D rb; //С помощью Rigidbody 2D будет осуществляться управление объектом
-    public float jumpForce = 7000f; //Сила прыжка
+    [Header("Movement settings")]
     public float speed = 5f; //Скорость движения
-
-    public Transform spawnPoint;
-
-    [SerializeField] private bool isGrounded = false;
+    public float jumpForce = 7000f; //Сила прыжка
+    public float currentSpeed;
+    [Header("Statement checks")]
     public float checkRadius;
     public LayerMask whatIsGround;
-    public Transform ObjectPosition;
+    public bool isGrounded;
+    [Header("Other")]
+    public Transform spawnPoint;
+    public Rigidbody2D rb; //С помощью Rigidbody 2D будет осуществляться управление объектом
+    public GameObject ball;
+    public GameObject rockBall;
+    public GameObject beachBall;
 
     void Start()
     {
@@ -27,57 +31,44 @@ public class PlayerMoving : MonoBehaviour
 
         if (Health > 0) //Управление объектом будет доступно, если здоровье выше нуля
         {
-            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Space))
-            {
-                speed = 10f; 
-            }
-        
-            float moveX = Input.GetAxis("Horizontal"); //Получение направления движения
-            rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
-            // rb.MovePosition(rb.position + Vector2.right * moveX * speed * Time.deltaTime); //Изменение позиции
-            /*            if (Input.GetKeyDown(KeyCode.Space)) 
-                        {
-            */
-            if (isGrounded && Input.GetKeyDown(KeyCode.Space))
-            {
-                rb.AddForce(Vector2.up * jumpForce); //Добавление силы прыжка
-            }
-
+            HandleMovement();
 
         }
-        else
+        else Respawn();
+       //HandleOtherBalls();
+    }
+
+
+    private void HandleMovement()
+    {
+        float moveX = Input.GetAxis("Horizontal"); //Получение направления движения
+        currentSpeed = moveX * speed;
+        rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space)) rb.AddForce(Vector2.up * jumpForce); //Добавление силы прыжка
+    }
+    private void HandleOtherBalls()
+    {
+        if (ball.activeSelf == true)
         {
-            //Destroy(gameObject);
-            Respawn();
+            rockBall.transform.position = ball.transform.position;
+            beachBall.transform.position = ball.transform.position;
         }
-
+        if (rockBall.activeSelf == true)
+        {
+            ball.transform.position = rockBall.transform.position;
+            beachBall.transform.position = rockBall.transform.position;
+        }
+        if (beachBall.activeSelf == true)
+        {
+            ball.transform.position = beachBall.transform.position;
+            rockBall.transform.position = beachBall.transform.position;
+        }
     }
     public void Respawn() {
 
-        speed = 0;
+        
         this.transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0);
         Health = 5;
 
     }
-
-   /* public float ChangeHealth()
-    {
-       return Health = Health - 10;
-    }*/
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        isGrounded = true;
-    //    }
-    //}
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        isGrounded = false;
-    //    }
-    //}
 }
