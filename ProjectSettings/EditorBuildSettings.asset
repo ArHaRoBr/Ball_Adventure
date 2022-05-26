@@ -6,10 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartGame.unity
+    guid: e8943ae5e102a5d46ad15991a5d5fd3e
+  - enabled: 1
     path: Assets/Scenes/Scene001.unity
     guid: a51c1e252103edb47996186305a2a693
   - enabled: 1
-    path: Assets/Scenes/Scene002.unity
-    guid: 73071493b7a4d7f4581d8cf5c0010023
+    path: Assets/Scenes/RockLand.unity
+    guid: f251aab12ea37084c8b78aa29b0a46a4
+  - enabled: 1
+    path: Assets/Scenes/BeachLand.unity
+    guid: f40dc8c0fd31bf5428a86c3bc593be90
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b9c73ed5ff6cedf4a992629a873cd994, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 0fffdd51c6dab484685fbed6abe9d0f9, type: 2}
